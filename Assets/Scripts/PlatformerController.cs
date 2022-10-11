@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
 
@@ -7,18 +8,32 @@ public class PlatformerController : MonoBehaviour
 {
     public List<KeyCode> ActiveKeyCodes;
     public List<KeyCode> KeyCodePossibilities;
-    
-    [Header("Player One")]
+
+    public float JumpForce;
+    public float MoveSpeed;
+    public Bullet bullet;
+
+    [Header("Player One")] 
+    public Rigidbody2D PlayerOneRb;
     public KeyCode P1Shoot;
     public KeyCode P1Jump;
     public KeyCode P1MoveLeft;
     public KeyCode P1MoveRight;
+    public GameObject P1PewPew;
+
+    public bool P1FacingRight = true;
 
     [Header("Player Two")] 
+    public Rigidbody2D PlayerTwoRb;
     public KeyCode P2Shoot;
     public KeyCode P2Jump;
     public KeyCode P2MoveLeft;
     public KeyCode P2MoveRight;
+    public GameObject P2PewPew;
+    
+    public bool P2FacingRight = true;
+    
+    
     
     void Start()
     {
@@ -31,6 +46,8 @@ public class PlatformerController : MonoBehaviour
         ActiveKeyCodes.Add(P2Jump);
         ActiveKeyCodes.Add(P2MoveLeft);
         ActiveKeyCodes.Add(P2MoveRight);
+        
+        
     }
 
     // Update is called once per frame
@@ -49,42 +66,85 @@ public class PlatformerController : MonoBehaviour
 
         if (Input.GetKeyDown(P1Jump))
         {
-            //Player 1 Jump
+            PlayerOneRb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
         
         if (Input.GetKeyDown(P1Shoot))
         {
-            //Player 1 Shoot
+            Instantiate(bullet, P1PewPew.transform.position, P1PewPew.transform.rotation);
         }
         
-        if (Input.GetKeyDown(P1MoveLeft))
+        if (Input.GetKey(P1MoveLeft))
         {
-            //Player 1 Left
+            if (P1FacingRight)
+            { /*
+                Vector3 tempVector = PlayerOneRb.transform.localScale;
+                tempVector.x = -1;
+                PlayerOneRb.transform.localScale = tempVector;
+                P1FacingRight = false;
+                */
+                PlayerOneRb.transform.rotation = Quaternion.Euler(0,180,0);
+                P1FacingRight = false;
+            }
+            PlayerOneRb.AddForce(Vector2.left * MoveSpeed * 0.1f, ForceMode2D.Impulse);
         }
         
-        if (Input.GetKeyDown(P1MoveRight))
+        if (Input.GetKey(P1MoveRight))
         {
-            //Player 1 Right
+            if (!P1FacingRight)
+            {
+                /*
+                Vector3 tempVector = PlayerOneRb.transform.localScale;
+                tempVector.x = 1;
+                PlayerOneRb.transform.localScale = tempVector;
+                P1FacingRight = true;
+                */
+                PlayerOneRb.transform.rotation = Quaternion.identity;
+                P1FacingRight = true;
+            }
+            PlayerOneRb.AddForce(Vector2.right * MoveSpeed * 0.1f, ForceMode2D.Impulse);
         }
         
         if (Input.GetKeyDown(P2Jump))
         {
-            //Player 2 Jump
+            PlayerTwoRb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
         
         if (Input.GetKeyDown(P2Shoot))
         {
-            //Player 2 Shoot
+            Instantiate(bullet, P2PewPew.transform.position, P2PewPew.transform.rotation);
         }
         
-        if (Input.GetKeyDown(P2MoveLeft))
+        if (Input.GetKey(P2MoveLeft))
         {
-            //Player 2 Left
+            if (P2FacingRight)
+            {
+                /*
+                Vector3 tempVector = PlayerTwoRb.transform.rotation;
+                tempVector.x = -1;
+                PlayerTwoRb.transform.localScale = tempVector;
+                P2FacingRight = false;
+                */
+                PlayerTwoRb.transform.rotation = Quaternion.Euler(0,180,0);
+                P2FacingRight = false;
+            }
+            PlayerTwoRb.AddForce(Vector2.left *MoveSpeed * 0.1f, ForceMode2D.Impulse);
         }
         
-        if (Input.GetKeyDown(P2MoveRight))
+        if (Input.GetKey(P2MoveRight))
         {
-            //Player 2 Right
+            if (!P2FacingRight)
+            {
+                /*
+                Vector3 tempVector = PlayerTwoRb.transform.localScale;
+                tempVector.x = 1;
+                PlayerTwoRb.transform.localScale = tempVector;
+                P2FacingRight = true;
+                */
+                PlayerTwoRb.transform.rotation = Quaternion.identity;
+                P2FacingRight = true;
+            }
+            PlayerTwoRb.AddForce(Vector2.right * MoveSpeed * 0.1f, ForceMode2D.Impulse);
         }
     }
 

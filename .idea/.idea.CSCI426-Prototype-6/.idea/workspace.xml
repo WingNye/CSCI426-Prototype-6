@@ -8,6 +8,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Bullet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlatformerController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -38,7 +39,7 @@
       <workItem from="1665305775513" duration="99000" />
       <workItem from="1665306239195" duration="1057000" />
       <workItem from="1665307336742" duration="1874000" />
-      <workItem from="1665448857489" duration="558000" />
+      <workItem from="1665448857489" duration="5927000" />
     </task>
     <servers />
   </component>
