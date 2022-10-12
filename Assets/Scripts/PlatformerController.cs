@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlatformerController : MonoBehaviour
 {
+    public HealthManager healthManager;
+
     public List<KeyCode> ActiveKeyCodes;
     public List<KeyCode> KeyCodePossibilities;
 
@@ -71,7 +73,8 @@ public class PlatformerController : MonoBehaviour
         
         if (Input.GetKeyDown(P1Shoot))
         {
-            Instantiate(bullet, P1PewPew.transform.position, P1PewPew.transform.rotation);
+            GameObject b = Instantiate(bullet.gameObject, P1PewPew.transform.position, P1PewPew.transform.rotation);
+            b.GetComponent<Bullet>().healthManager = healthManager;
         }
         
         if (Input.GetKey(P1MoveLeft))
@@ -112,7 +115,8 @@ public class PlatformerController : MonoBehaviour
         
         if (Input.GetKeyDown(P2Shoot))
         {
-            Instantiate(bullet, P2PewPew.transform.position, P2PewPew.transform.rotation);
+            GameObject b = Instantiate(bullet.gameObject, P2PewPew.transform.position, P2PewPew.transform.rotation);
+            b.GetComponent<Bullet>().healthManager = healthManager;
         }
         
         if (Input.GetKey(P2MoveLeft))

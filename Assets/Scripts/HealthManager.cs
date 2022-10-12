@@ -20,13 +20,19 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void playerOneTakeDamage(float damage)
     {
         playerOneHealthAmount -= damage;
         playerOneHealthBar.fillAmount = playerOneHealthAmount/100f;
+    }
+
+    public void playerTwoTakeDamage(float damage)
+    {
+        playerTwoHealthAmount -= damage;
+        playerTwoHealthBar.fillAmount = playerTwoHealthAmount/100f;
     }
 
 }
